@@ -1,5 +1,6 @@
 require 'ldclient-rb'
 
+# TODO : Enter your LaunchDarkly API key here
 client = LaunchDarkly::LDClient.new("YOUR_API_KEY")
 
 user = {
@@ -11,6 +12,7 @@ user = {
   }
 }
 
+# TODO : Enter the key for your feature flag here
 if client.toggle?("YOU_FEATURE_FLAG_KEY", user, false)
   # application code to show the feature
   puts "Showing your feature to #{user[:key]}"
