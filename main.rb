@@ -1,7 +1,10 @@
 require 'ldclient-rb'
 
+log = ::Logger.new($stdout)
+log.level = ::Logger::DEBUG
+config = LaunchDarkly::Config.new({:logger => log})
 # TODO : Enter your LaunchDarkly SDK key here
-client = LaunchDarkly::LDClient.new("YOUR_SDK_KEY")
+client = LaunchDarkly::LDClient.new("YOUR_SDK_KEY", config)
 
 user = {
   key: "bob@example.com",
