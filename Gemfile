@@ -2,4 +2,4 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'ldclient-rb', '~> 5.3.0'
+gem 'ldclient-rb', '~> 5.4.0'
