@@ -2,4 +2,4 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'ldclient-rb', '~> 5.5.4'
+gem 'launchdarkly-server-sdk', '~> 5.5.7'
