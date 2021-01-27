@@ -27,7 +27,6 @@ jobs:
           name: Run hello
           command: bundle exec ruby main.rb | tee output.txt
       - run:
-      - run:
           name: Check output
           command: |
             grep "is true for this user" output.txt || (echo "Flag did not evaluate to expected true value" && exit 1)
