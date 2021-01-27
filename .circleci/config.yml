@@ -1,10 +1,13 @@
 version: 2.1
 
 workflows:
-  version: 2
-  build_all:
+  test:
     jobs:
       - build-run-linux
+
+# This CI build ensures that the demo both compiles and works correctly. For the runtime test,
+# we use an SDK key and flag key that are passed in via the CircleCI project configuration;
+# the flag is configured to return a true value.
 
 jobs:
   build-run-linux:
@@ -13,8 +16,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: insert SDK key and flag key into demo code
+          command: |
+            sed -i.bak "s/sdk_key *= *\".*\"/sdk_key = \"${LD_DEMO_SDK_KEY}\"/" main.rb
+            sed -i.bak "s/feature_flag_key *= *\".*\"/feature_flag_key = \"${LD_DEMO_FLAG_KEY}\"/" main.rb
+      - run:
           name: Install dependencies
           command: bundle install
       - run:
           name: Run hello
-          command: bundle exec ruby main.rb
+          command: bundle exec ruby main.rb | tee output.txt
+      - run:
+          name: Check output
+          command: |
+            grep "is true for this user" output.txt || (echo "Flag did not evaluate to expected true value" && exit 1)
