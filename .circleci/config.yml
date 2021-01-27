@@ -1,0 +1,20 @@
+version: 2.1
+
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build-run-linux
+
+jobs:
+  build-run-linux:
+    docker:
+      - image: circleci/ruby:2.7
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: bundle install
+      - run:
+          name: Run hello
+          command: bundle exec ruby main.rb
