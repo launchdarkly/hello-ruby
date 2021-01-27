@@ -2,7 +2,7 @@
 
 We've built a simple console application that demonstrates how LaunchDarkly's SDK works.
 
- Below, you'll find the basic build procedure, but for more comprehensive instructions, you can visit your [Quickstart page](https://app.launchdarkly.com/quickstart#/) or the [Go SDK reference guide](https://docs.launchdarkly.com/sdk/server-side/go).
+ Below, you'll find the basic build procedure, but for more comprehensive instructions, you can visit your [Quickstart page](https://app.launchdarkly.com/quickstart#/) or the [Ruby SDK reference guide](https://docs.launchdarkly.com/sdk/server-side/ruby).
 
 This demo requires Ruby version 2.5.0 or higher (or, for JRuby, 9.2.0 or higher).
 
