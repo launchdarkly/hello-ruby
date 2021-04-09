@@ -21,3 +21,5 @@ feature_flag_key = "my-flag"
 3. On the command line, run `bundle install`
 
 4. Run `bundle exec ruby main.rb`
+
+You should see the message `"Feature flag '<flag key>' is <true/false> for this user"`.
