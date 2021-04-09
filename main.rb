@@ -7,8 +7,8 @@ sdk_key = ""
 feature_flag_key = "my-boolean-flag"
 
 def show_message(s)
-	puts "*** #{s}"
-	puts
+  puts "*** #{s}"
+  puts
 end
 
 if sdk_key == ""
@@ -19,10 +19,10 @@ end
 client = LaunchDarkly::LDClient.new(sdk_key)
 
 if client.initialized?
-	show_message "SDK successfully initialized!"
+  show_message "SDK successfully initialized!"
 else
-	show_message "SDK failed to initialize"
-	exit 1
+  show_message "SDK failed to initialize"
+  exit 1
 end
 
 # Set up the user properties. This user should appear on your LaunchDarkly users dashboard
