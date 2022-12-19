@@ -25,20 +25,21 @@ else
   exit 1
 end
 
-# Set up the user properties. This user should appear on your LaunchDarkly users dashboard
+# Set up the context properties. This context should appear on your LaunchDarkly contexts dashboard
 # soon after you run the demo.
-user = {
-  key: "example-user-key",
-  name: "Sandy"
-}
+context = LaunchDarkly::LDContext.create({
+                                           key: "example-user-key",
+                                           kind: "user",
+                                           name: "Sandy"
+                                         })
 
-flag_value = client.variation(feature_flag_key, user, false)
+flag_value = client.variation(feature_flag_key, context, false)
 
-show_message "Feature flag '#{feature_flag_key}' is #{flag_value} for this user"
+show_message "Feature flag '#{feature_flag_key}' is #{flag_value} for this context"
 
 # Here we ensure that the SDK shuts down cleanly and has a chance to deliver analytics
 # events to LaunchDarkly before the program exits. If analytics events are not delivered,
-# the user properties and flag usage statistics will not appear on your dashboard. In a
+# the context properties and flag usage statistics will not appear on your dashboard. In a
 # normal long-running application, the SDK would continue running and events would be
 # delivered automatically in the background.
 client.close()
