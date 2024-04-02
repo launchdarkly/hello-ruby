@@ -19,6 +19,43 @@ elsif feature_flag_key == ''
   exit 1
 end
 
+def show_flag_message(flag_key, flag_value)
+  show_message "Feature flag '#{flag_key}' is #{flag_value} for this context"
+
+  if flag_value
+    show_message "                                                  \n" +
+    "                                                  \n" +
+    "                       @@                         \n" +
+    "                         @@@                      \n" +
+    "               @(          @@@.                   \n" +
+    "                 #@@@@@     @@@@@                 \n" +
+    "                      @@@@@@@ @@@@@.              \n" +
+    "                          @@@@@@@@@@@@            \n" +
+    "         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.         \n" +
+    "                 (@@@@@@@@@@@@@@@@@@@@@@          \n" +
+    "                         @@@@@@@@@@@@*            \n" +
+    "                     @@@@@@@  @@@@@               \n" +
+    "                 @@@@/      @@@@*                 \n" +
+    "                          @@@@                    \n" +
+    "                        &@@*                      \n" +
+    "                       @@                         \n" +
+    "                                                  \n" +
+    ""
+  end
+end
+
+class FlagChangeListener
+  def initialize(feature_flag_key)
+    @feature_flag_key = feature_flag_key
+  end
+
+  def update(changed)
+    if @feature_flag_key.eql?(changed.key)
+      show_flag_message(@feature_flag_key, changed.new_value)
+    end
+  end
+end
+
 client = LaunchDarkly::LDClient.new(sdk_key)
 
 if client.initialized?
@@ -38,11 +75,12 @@ context = LaunchDarkly::LDContext.create({
 
 flag_value = client.variation(feature_flag_key, context, false)
 
-show_message "Feature flag '#{feature_flag_key}' is #{flag_value} for this context"
+show_flag_message(feature_flag_key, flag_value)
 
-# Here we ensure that the SDK shuts down cleanly and has a chance to deliver analytics
-# events to LaunchDarkly before the program exits. If analytics events are not delivered,
-# the context properties and flag usage statistics will not appear on your dashboard. In a
-# normal long-running application, the SDK would continue running and events would be
-# delivered automatically in the background.
-client.close
+client.flag_tracker.add_flag_value_change_listener(feature_flag_key, context, FlagChangeListener.new(feature_flag_key))
+
+# Run the Hello App continously to react to flag change in LaunchDarkly
+thr = Thread.new {
+  sleep
+}
+thr.join
