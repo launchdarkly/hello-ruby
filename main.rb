@@ -6,24 +6,19 @@ sdk_key = ENV['LAUNCHDARKLY_SERVER_KEY']
 # Set feature_flag_key to the feature flag key you want to evaluate
 feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY']
 
-def show_message(msg)
-  puts "*** #{msg}"
-  puts
-end
-
 if sdk_key == ''
-  show_message 'Please set the LAUNCHDARKLY_SERVER_KEY environment variable'
+  puts "*** Please set the LAUNCHDARKLY_SERVER_KEY environment variable\n"
   exit 1
 elsif feature_flag_key == ''
-  show_message 'Please set the LAUNCHDARKLY_FLAG_KEY environment variable'
+  puts "*** Please set the LAUNCHDARKLY_FLAG_KEY environment variable\n"
   exit 1
 end
 
 def show_flag_message(flag_key, flag_value)
-  show_message "Feature flag '#{flag_key}' is #{flag_value} for this context"
+  puts "*** Feature flag '#{flag_key}' is #{flag_value} for this context\n"
 
   if flag_value
-    show_message "                                                  \n" +
+    puts "                                                  \n" +
     "                                                  \n" +
     "                       @@                         \n" +
     "                         @@@                      \n" +
@@ -40,28 +35,22 @@ def show_flag_message(flag_key, flag_value)
     "                        &@@*                      \n" +
     "                       @@                         \n" +
     "                                                  \n" +
-    ""
+    "\n"
   end
 end
 
 class FlagChangeListener
-  def initialize(feature_flag_key)
-    @feature_flag_key = feature_flag_key
-  end
-
   def update(changed)
-    if @feature_flag_key.eql?(changed.key)
-      show_flag_message(@feature_flag_key, changed.new_value)
-    end
+    show_flag_message(changed.key, changed.new_value)
   end
 end
 
 client = LaunchDarkly::LDClient.new(sdk_key)
 
 if client.initialized?
-  show_message 'SDK successfully initialized!'
+  puts "*** SDK successfully initialized!\n"
 else
-  show_message 'SDK failed to initialize'
+  puts "*** SDK failed to initialize\n"
   exit 1
 end
 
@@ -77,10 +66,11 @@ flag_value = client.variation(feature_flag_key, context, false)
 
 show_flag_message(feature_flag_key, flag_value)
 
-client.flag_tracker.add_flag_value_change_listener(feature_flag_key, context, FlagChangeListener.new(feature_flag_key))
+client.flag_tracker.add_flag_value_change_listener(feature_flag_key, context, FlagChangeListener.new)
 
 # Run the Hello App continously to react to flag change in LaunchDarkly
 thr = Thread.new {
+  puts "*** Press Ctrl+C to terminate the hello app."
   sleep
 }
 thr.join
