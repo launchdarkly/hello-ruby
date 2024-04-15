@@ -18,24 +18,17 @@ def show_flag_message(flag_key, flag_value)
   puts "*** Feature flag '#{flag_key}' is #{flag_value} for this context\n"
 
   if flag_value
-    puts "                                                  \n" +
-    "                                                  \n" +
-    "                       @@                         \n" +
-    "                         @@@                      \n" +
-    "               @(          @@@.                   \n" +
-    "                 #@@@@@     @@@@@                 \n" +
-    "                      @@@@@@@ @@@@@.              \n" +
-    "                          @@@@@@@@@@@@            \n" +
-    "         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.         \n" +
-    "                 (@@@@@@@@@@@@@@@@@@@@@@          \n" +
-    "                         @@@@@@@@@@@@*            \n" +
-    "                     @@@@@@@  @@@@@               \n" +
-    "                 @@@@/      @@@@*                 \n" +
-    "                          @@@@                    \n" +
-    "                        &@@*                      \n" +
-    "                       @@                         \n" +
-    "                                                  \n" +
-    "\n"
+    puts
+    puts "        ██       "
+    puts "          ██     "
+    puts "      ████████   "
+    puts "         ███████ "
+    puts "██ LAUNCHDARKLY █"
+    puts "         ███████ "
+    puts "      ████████   "
+    puts "          ██     "
+    puts "        ██       "
+    puts
   end
 end
 
