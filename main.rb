@@ -6,6 +6,8 @@ sdk_key = ENV['LAUNCHDARKLY_SERVER_KEY']
 # Set feature_flag_key to the feature flag key you want to evaluate
 feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY']
 
+ci = ARGV.length > 0 && ARGV[0].eql?("CI")
+
 if sdk_key == ''
   puts "*** Please set the LAUNCHDARKLY_SERVER_KEY environment variable\n"
   exit 1
@@ -58,6 +60,10 @@ context = LaunchDarkly::LDContext.create({
 flag_value = client.variation(feature_flag_key, context, false)
 
 show_flag_message(feature_flag_key, flag_value)
+
+if ci
+  exit 0
+end
 
 client.flag_tracker.add_flag_value_change_listener(feature_flag_key, context, FlagChangeListener.new)
 
