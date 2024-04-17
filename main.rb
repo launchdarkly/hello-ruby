@@ -6,7 +6,7 @@ sdk_key = ENV['LAUNCHDARKLY_SERVER_KEY']
 # Set feature_flag_key to the feature flag key you want to evaluate
 feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY']
 
-ci = ARGV.length > 0 && ARGV[0].eql?("CI")
+ci = ENV['CI']
 
 if sdk_key == ''
   puts "*** Please set the LAUNCHDARKLY_SERVER_KEY environment variable\n"
