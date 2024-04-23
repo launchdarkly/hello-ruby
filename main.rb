@@ -61,15 +61,13 @@ flag_value = client.variation(feature_flag_key, context, false)
 
 show_flag_message(feature_flag_key, flag_value)
 
-if ci
-  exit 0
-end
+exit 0 if ci
 
 client.flag_tracker.add_flag_value_change_listener(feature_flag_key, context, FlagChangeListener.new)
 
-# Run the Hello App continously to react to flag change in LaunchDarkly
+# Run the Hello App continuously to react to flag change in LaunchDarkly
 thr = Thread.new {
-  puts "*** Press Ctrl+C to terminate the hello app."
+  puts "*** Waiting for changes."
   sleep
 }
 thr.join
