@@ -17,7 +17,7 @@ elsif feature_flag_key == ''
 end
 
 def show_flag_message(flag_key, flag_value)
-  puts "*** Feature flag '#{flag_key}' is #{flag_value} for this context\n"
+  puts "*** The '#{flag_key}' feature flag evaluates to #{flag_value}.\n"
 
   if flag_value
     puts
