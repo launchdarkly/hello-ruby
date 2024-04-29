@@ -1,7 +1,6 @@
 require 'ldclient-rb'
 
-# Set sdk_key to your LaunchDarkly SDK key before running
-sdk_key = ENV['LAUNCHDARKLY_SERVER_KEY']
+sdk_key = ENV['LAUNCHDARKLY_SDK_KEY']
 
 # Set feature_flag_key to the feature flag key you want to evaluate
 feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY']
@@ -9,7 +8,7 @@ feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY']
 ci = ENV['CI']
 
 if sdk_key == ''
-  puts "*** Please set the LAUNCHDARKLY_SERVER_KEY environment variable\n"
+  puts "*** Please set the LAUNCHDARKLY_SDK_KEY environment variable\n"
   exit 1
 elsif feature_flag_key == ''
   puts "*** Please set the LAUNCHDARKLY_FLAG_KEY environment variable\n"
