@@ -3,7 +3,7 @@ require 'ldclient-rb'
 sdk_key = ENV['LAUNCHDARKLY_SDK_KEY']
 
 # Set feature_flag_key to the feature flag key you want to evaluate
-feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY']
+feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY'] || 'sample-feature'
 
 ci = ENV['CI']
 
