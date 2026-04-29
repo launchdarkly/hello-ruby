@@ -39,7 +39,21 @@ class FlagChangeListener
   end
 end
 
-client = LaunchDarkly::LDClient.new(sdk_key)
+relay_uri = ENV['LAUNCHDARKLY_RELAY_URI'] || 'https://localhost:8030'
+
+config = LaunchDarkly::Config.new(
+  data_system_config: LaunchDarkly::DataSystem.custom
+    .initializers([
+      LaunchDarkly::DataSystem.polling_ds_builder.base_uri(relay_uri),
+    ])
+    .synchronizers([
+      LaunchDarkly::DataSystem.streaming_ds_builder.base_uri(relay_uri),
+      LaunchDarkly::DataSystem.polling_ds_builder.base_uri(relay_uri),
+    ])
+    .build
+)
+
+client = LaunchDarkly::LDClient.new(sdk_key, config)
 
 if client.initialized?
   puts "*** SDK successfully initialized!\n"

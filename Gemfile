@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'launchdarkly-server-sdk', '~> 8.0'
+gem 'launchdarkly-server-sdk', '8.12.3'
 
 # Observer must be declared as of ruby 3.4
 gem 'observer', '~> 0.1.0'
