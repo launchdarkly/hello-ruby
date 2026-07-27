@@ -4,7 +4,7 @@ We've built a simple console application that demonstrates how LaunchDarkly's SD
 
 Below, you'll find the basic build procedure. For more comprehensive instructions, you can visit your [Quickstart page](https://app.launchdarkly.com/quickstart#/) or the [Ruby reference guide](https://docs.launchdarkly.com/sdk/server-side/ruby).
 
-This demo requires Ruby version 3.0.0 or higher (or, for JRuby, 9.4.0 or higher).
+This demo requires Ruby version 3.1.0 or higher (or, for JRuby, 9.4.0 or higher).
 
 ## Build instructions
 
