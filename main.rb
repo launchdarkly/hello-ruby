@@ -7,10 +7,10 @@ feature_flag_key = ENV['LAUNCHDARKLY_FLAG_KEY'] || 'sample-feature'
 
 ci = ENV['CI']
 
-if sdk_key == ''
+if sdk_key.nil? || sdk_key.empty?
   puts "*** Please set the LAUNCHDARKLY_SDK_KEY environment variable\n"
   exit 1
-elsif feature_flag_key == ''
+elsif feature_flag_key.empty?
   puts "*** Please set the LAUNCHDARKLY_FLAG_KEY environment variable\n"
   exit 1
 end
